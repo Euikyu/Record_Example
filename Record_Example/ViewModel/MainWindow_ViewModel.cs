@@ -22,7 +22,9 @@ namespace Record_Example.ViewModel
         #region Commands
         //Host 로드 완료 시 호출됨
         public RelayCommand<WindowsFormsHost> HostLoaded { get; }
+        //이미지 로드 버튼 클릭 시 호출됨
         public RelayCommand ImageLoadBtnClick { get; }
+        //오버레이 이미지 저장 버튼 클릭 시 호출됨
         public RelayCommand OverlaySaveBtnClick { get; }
         //Record 체크 시 호출됨
         public RelayCommand<string> RecordChecked { get; }
@@ -55,7 +57,7 @@ namespace Record_Example.ViewModel
 
         #region Methods
         /// <summary>
-        /// 
+        /// HostLoaded 호출 시 실행되는 내용
         /// </summary>
         /// <param name="host">UI에 나타낼 WindowsFormsHost</param>
         private void OnHostLoaded(WindowsFormsHost host)
@@ -69,6 +71,10 @@ namespace Record_Example.ViewModel
             //레코드 추가
             m_Display.Record = m_OriginRecord;
         }
+        /// <summary>
+        /// RecordChecked 호출 시 실행되는 내용
+        /// </summary>
+        /// <param name="key">CheckBox의 Content (Record key) </param>
         private void OnChecked(string key)
         {
             //레코드 키 값을 이용하여 레코드 존재 여부 확인 
@@ -88,6 +94,10 @@ namespace Record_Example.ViewModel
                 m_Display.Record = newRecord;
             }
         }
+        /// <summary>
+        /// RecordUnchecked 호출 시 실행되는 내용
+        /// </summary>
+        /// <param name="key">CheckBox의 Content (Record key) </param>
         private void OnUnchecked(string key)
         {
             //새로운 레코드 생성
@@ -102,6 +112,9 @@ namespace Record_Example.ViewModel
             //디스플레이에 등록
             m_Display.Record = newRecord;
         }
+        /// <summary>
+        /// ImageLoadBtnClick 호출 시 실행되는 내용
+        /// </summary>
         private void OnImageLoad()
         {
             var dialog = new OpenFileDialog
@@ -113,6 +126,9 @@ namespace Record_Example.ViewModel
                 m_Display.Image = new CogImage8Grey(new System.Drawing.Bitmap(dialog.FileName));
             }
         }
+        /// <summary>
+        /// OverlaySaveBtnClick 호출 시 실행되는 내용
+        /// </summary>
         private void OnOverlaySave()
         {
             var dialog = new SaveFileDialog
